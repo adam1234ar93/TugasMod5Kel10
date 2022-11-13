@@ -12,7 +12,20 @@ import React, { useState } from "react";
 const BASE_API_URL = `https://reqres.in/api`;
 
 function AddUserDialog({ open, onClose, users, setUsers }) {
+  const [name, setName] = useState("");
+  const [year, setYear] = useState("");
 
+  const handleSubmit = () => {
+    axios
+      .post(`${BASE_API_URL}/users`, {
+        name: name,
+        year: year
+      })
+      .then((res) => {
+        setUsers([...users, res.data]);
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
